@@ -1,0 +1,44 @@
+block {
+    display: block;
+    background-color: #e6e6e6;
+}
+
+answer {
+    display: block;
+    background-color: #ccffeb;
+    cursor: pointer;
+}
+
+comment {
+    color: green;
+    padding-left: 1em;
+}
+
+error {
+    color: red;
+    display: block;
+}
+
+h4 {
+    margin: 0;
+}
+
+tab {
+    display: block;
+    padding-left: 2em;
+}
+
+tab2 {
+    display: block;
+    padding-left: 4em;
+}
+
+tab3 {
+    display: block;
+    padding-left: 6em;
+}
+
+tab4 {
+    display: block;
+    padding-left: 8em;
+}

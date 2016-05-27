@@ -1,0 +1,127 @@
+<html>
+
+<head>
+  <meta charset="utf-8">
+
+  <title>The Typescript - Interfaces</title>
+  <link rel="stylesheet" href="/app/app.css">
+</head>
+
+<body>
+    <a href="/">Main</a>
+    <h1>Interfaces</h1>
+    
+    <h4>basic</h4>
+    <block>
+        <div>interface SquareConfig {</div>
+        <tab>    color: string;</tab>
+        <tab>    width?: number;</tab>
+        <div>}</div><br>
+        <div>function createSquare(config: SquareConfig): {color: string; area: number} {</div>
+        <tab>    let newSquare = {color: "white", area: 100};</tab>
+        <tab>    if (config.color) {</tab>
+        <tab2>        newSquare.color = config.color;</tab2>
+        <tab>    }</tab>
+        <tab>    if (config.width) {</tab>
+        <tab2>        newSquare.area = config.width * config.width;</tab2>
+        <tab>    }</tab>
+        <tab>    return newSquare;</tab>
+        <div>}</div><br>
+        <div>let mySquare = createSquare({color: "black"});</div>
+    </block>
+    <answer id="a1">show answer</answer>
+    <br>
+    
+    <h4>pitfall</h4>
+    <block>
+        <div>interface SquareConfig {</div>
+        <tab>    color?: string;</tab>
+        <tab>    width?: number;</tab>
+        <div>}</div><br>
+        <div>function createSquare(config: SquareConfig): {color: string; area: number} {</div>
+        <tab>    let newSquare = {color: "white", area: 100};</tab>
+        <tab>    if (config.color) {</tab>
+        <tab2>        newSquare.color = config.color;</tab2>
+        <tab>    }</tab>
+        <tab>    if (config.width) {</tab>
+        <tab2>        newSquare.area = config.width * config.width;</tab2>
+        <tab>    }</tab>
+        <tab>    return newSquare;</tab>
+        <div>}</div><br>
+        <div><comment> // error: 'colour' not expected in type 'SquareConfig'</comment></div>
+        <div><comment> // error: type checks when same type as interface are passed in</comment></div>
+        <error>let mySquare = createSquare({ colour: "red", width: 100 });</error><br>
+        <div><comment> // workaround</comment></div>
+        <div>let mySquare = createSquare({ width: 100, opacity: 0.5 } as SquareConfig);</div><br>
+        <div><comment> // preferred workaround : change interface to account for infinite other properties</comment></div>
+        <div>interface SquareConfig {</div>
+        <tab>    color?: string;</tab>
+        <tab>    width?: number;</tab>
+        <tab>    [propName: string]: any;</tab>
+        <div>}</div><br>
+        <div><comment> // hacky workaround : assign the object to another variable</comment></div>
+        <div>let squareOptions = { colour: "red", width: 100 };</div>
+        <div>let mySquare = createSquare(squareOptions);</div>
+    </block>
+    <br>
+    
+    <h4>function types</h4>
+    <block>
+        <div>interface SearchFunc {</div>
+        <tab>    (source: string, subString: string): boolean;</tab>
+        <div>}</div><br>
+        <div>let mySearch: SearchFunc;</div>
+        <div>mySearch = function(source: string, subString: string) { <comment>//return type is not required but best practice is to be explicit</comment></div>
+        <tab>    let result = source.search(subString);</tab>
+        <tab>    if (result == -1) {</tab>
+        <tab2>        return false;</tab2>
+        <tab>    }</tab>
+        <tab>    else {</tab>
+        <tab2>        return true;</tab2>
+        <tab>    }</tab>
+        <div>}</div><br>
+        <div><comment> // this is also valid : name of parameters do not need to match</comment></div>
+        <div>let mySearch: SearchFunc;</div>
+        <div>mySearch = function(src: string, sub: string): boolean {</div>
+        <tab>    let result = src.search(sub);</tab>
+        <tab>    if (result == -1) {</tab>
+        <tab2>        return false;</tab2>
+        <tab>    }</tab>
+        <tab>    else {</tab>
+        <tab2>        return true;</tab2>
+        <tab>    }</tab>
+        <div>}</div>
+    </block>
+    <br>
+    
+    <h4>indexable types</h4>
+    <block>
+        <div>interface StringArray {</div>
+        <div>
+            <comment>//This index signature states that when a StringArray is indexed with a number, it will return a string.</comment>
+        </div>
+        <tab>    [index: number]: string;</tab>
+        <div>}</div><br>
+        <div>let myArray: StringArray;</div>
+        <div>myArray = ["Bob", "Fred"];</div><br>
+        <div>let myStr: string = myArray[0];</div>
+    </block>
+    <br>
+    
+    <h4>pitfalls</h4>
+    <block>
+        <div>class Animal {</div>
+        <tab>    name: string;</tab>
+        <div>}</div>
+        <div>class Dog extends Animal {</div>
+        <tab>    breed: string;</tab>
+        <div>}</div><br>
+        <div><comment>// Error: indexing with a 'string' will sometimes get you a Dog!</comment></div>
+        <div>interface NotOkay {</div>
+        <tab>    [x: number]: Animal;</tab>
+        <tab>    [x: string]: Dog;</tab>
+        <div>}</div>
+    </block>
+    <script src="./scripts.js"></script>
+
+</html>

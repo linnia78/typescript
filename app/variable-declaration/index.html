@@ -1,0 +1,159 @@
+<html>
+
+<head>
+  <meta charset="utf-8">
+
+  <title>The Typescript - Variable Declarations</title>
+  <link rel="stylesheet" href="/app/app.css">
+</head>
+
+<body>
+  <a href="/">Main</a>
+  <h1>var declarations</h1>
+  <block>
+    <div>function f() {</div>
+    <tab> var a = 10;</tab>
+    <tab> return function g() {</tab>
+    <tab2>    var b = a + 1;</tab2>
+    <tab2>    return b;</tab2>
+    <tab> }</tab>
+    <div>}</div>
+    <div>var g = f();</div>
+    <div>g();
+      <comment>//result?</comment>
+    </div>
+  </block>
+  <answer id="a1">Show Answer</answer>
+  <br>
+  <block>
+    <div>function f() {</div>
+    <tab> var a = 1;</tab><br>
+    <tab> a = 2;</tab>
+    <tab> var b = g();</tab>
+    <tab> a = 3;</tab><br>
+    <tab> return b;</tab><br>
+    <tab> function g() {</tab>
+    <tab2>    return a;</tab2>
+    <tab> }</tab>
+    <div>}</div>
+    <div>f();
+      <comment>//result?</comment>
+    </div>
+  </block>
+  <answer id="a2">Show Answer</answer>
+  <br>
+  <block>
+    <div>function f(shouldInitialize) {</div>
+    <tab> if (shouldInitialize) {</tab>
+    <tab2>  var x = 10;</tab2>
+    <tab> }</tab><br>
+    <tab> return x;</tab>
+    <div>}</div><br>
+    <div>f(true);
+      <comment>//result?</comment>
+    </div>
+    <div>f(false);
+      <comment>//result?</comment>
+    </div>
+  </block>
+  <answer id="a3">Show Answer</answer>
+  <br>
+  <block>
+    <div>function sumMatrix(matrix) {</div>
+    <tab> var sum = 0;</tab>
+    <tab> for (var i = 0; i < matrix.length; i++) {</tab>
+    <tab2>    var currentRow = matrix[i];</tab2>
+    <tab2>    for (var i = 0; i < currentRow.length; i++) {</tab2>
+    <tab3>    sum += currentRow[i];</tab3>
+    <tab2>    }</tab2>
+    <tab> }</tab><br>
+    <tab> return sum;</tab>
+    <div>}</div>
+    <div>subMatrix([[1,2],[1,2]])
+      <comment>//result?</comment>
+    </div>
+  </block>
+  <answer id="a4">Show Answer</answer>
+  <br>
+  <block>
+    <div>function f() {</div>
+    <tab> for (var i = 0; i < 10; i++) {</tab>
+    <tab2>    setTimeout(function() {console.log(i); }, 100 * i);</tab2>
+    <tab> }</tab>
+    <div>}</div>
+    <div>f();
+      <comment>//result?</comment>
+    </div>
+  </block>
+  <answer id="a5">Show Answer</answer>
+  <h4>work around</h4>
+  <block>
+    <div>function f() {</div>
+    <tab> for (var i = 0; i < 10; i++) {</tab>
+    <tab2>    (function(i) {</tab2>
+    <tab3>      setTimeout(function() { console.log(i); }, 100 * i);</tab3>
+    <tab2>    })(i);</tab2>
+    <tab> }</tab>
+    <div>}</div>
+    <div>f();
+      <comment>//result?</comment>
+    </div>
+  </block>
+  <answer id="a6">Show Answer</answer>
+  <br>
+  <h1>let/const declarations</h1>
+  <block>
+    <div>function sumMatrix(matrix) {</div>
+    <tab> let sum = 0;</tab>
+    <tab> for (let i = 0; i < matrix.length; i++) {</tab>
+    <tab2>  var currentRow = matrix[i];</tab2>
+    <tab2>  for (let i = 0; i < currentRow.length; i++) {</tab2>
+    <tab3>    sum += currentRow[i];</tab3>
+    <tab2>  }</tab2>
+    <tab>}</tab><br>
+    <tab>return sum;</tab>
+    <div>}</div>
+    <div>subMatrix([[1,2],[1,2]])
+      <comment>//result?</comment>
+    </div>
+  </block>
+  <answer id="a7">Show Answer</answer>
+  <br>
+  <block>
+    <div>function f() {</div>
+    <tab> for (let i = 0; i < 10 ; i++) {</tab>
+    <tab2>  setTimeout(function() {console.log(i); }, 100 * i);</tab2>
+    <tab> }</tab>
+    <div>}</div>
+    <div>f();
+      <comment>//result?</comment>
+    </div>
+  </block>
+  <answer id="a8">Show Answer</answer>
+  <br>
+  <block>
+    <div>const numLivesForCat = 9;</div>
+    <div>const kitty = {</div>
+    <tab>   name: "Aurora",</tab>
+    <tab>   numLives: numLivesForCat,</tab>
+    <div>}</div><br>
+
+    <div>kitty = {</div>
+    <tab>   name: "Danielle",</tab>
+    <tab>   numLives: numLivesForCat</tab>
+    <div>};</div><br>
+
+    <div>kitty.name = "Rory";</div>
+    <div>kitty.name = "Kitty";</div>
+    <div>kitty.name = "Cat";</div>
+    <div>kitty.numLives--;</div>
+    <div>
+      <comment>//which would show error?</comment>
+    </div>
+  </block>
+  <answer id="a9">Show Answer</answer>
+  <br>
+</body>
+<script src="./script.js"></script>
+
+</html>

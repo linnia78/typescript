@@ -1,0 +1,171 @@
+<html>
+
+<head>
+  <meta charset="utf-8">
+
+  <title>The Typescript - Destructing</title>
+  <link rel="stylesheet" href="/app/app.css">
+</head>
+
+<body>
+    <a href="/">Main</a>
+    <h1>Destructing</h1>
+    
+    <h4>basic</h4>
+    <block>
+        <div>let input = [1, 2];</div>
+        <div>let [first, second] = input;</div>
+        <div>first<comment>//result?</comment></div>
+        <div>second<comment>//result?</comment></div>
+    </block>
+    <answer id="a1">show answer</answer>
+    <br>
+    
+    <h4>swap</h4>
+    <block>
+        <div>let input = [1, 2];</div>
+        <div>let [first, second] = input;</div>
+        <div>[first, second] = [second, first];</div>
+        <div>first<comment>//result?</comment></div>
+        <div>second<comment>//result?</comment></div>
+    </block>
+    <answer id="a2">show answer</answer>
+    <br>
+    
+    <h4>as parameter</h4>
+    <block>
+        <div>let input = [1, 2];</div>
+        <div>function f([first, second]: [number, number]) {</div>
+        <tab>   console.log(first);</tab>
+        <tab>   console.log(second);</tab>
+        <div>}</div>
+        <div>f(input);</div><br>
+        <div>first<comment>//result?</comment></div>
+        <div>second<comment>//result?</comment></div>
+    </block>
+    <answer id="a3">show answer</answer>
+    <br>
+    
+    <h4>rest params</h4>
+    <block>
+        <div>let [first, ...rest] = [1, 2, 3, 4];</div><br>
+        <div>console.log(first);<comment>//result?</comment></div>
+        <div>console.log(rest); <comment>//result?</comment></div>
+    </block>
+    <answer id="a4">show answer</answer>
+    <br>
+    
+    <h4>skip</h4>
+    <block>
+        <div>let [first] = [1, 2, 3, 4];</div>
+        <div>let [, second, , fourth] = [1, 2, 3, 4];</div><br>
+        <div>console.log(first); <comment>//result?</comment></div>
+        <div>console.log(second); <comment>//result?</comment></div>
+        <div>console.log(fourth); <comment>//result?</comment></div>
+    </block>
+    <answer id="a5">show answer</answer>
+    <br>
+    
+    <h4>object</h4>
+    <block>
+        <div>let o = {</div>
+        <tab>   a: "foo",</tab>
+        <tab>   b: 12,</tab>
+        <tab>   c: "bar"</tab>
+        <div>}</div>
+        <div>let {a, b} = o;</div>
+        <div>console.log(a); <comment>//result?</comment></div>
+        <div>console.log(b); <comment>//result?</comment></div>
+    </block>
+    <answer id="a6">show answer</answer>
+    <br>
+    
+    <h4>direct object assign</h4>
+    <block>
+        <div>let {a, b} = {a: "baz", b: 101};</div>
+        <div>console.log(a); <comment>//result?</comment></div>
+        <div>console.log(b); <comment>//result?</comment></div>
+    </block>
+    <answer id="a7">show answer</answer>
+    <br>
+    
+    <h4>property renaming</h4>
+    <block>
+        <div>let o = {</div>
+        <tab>   a: "foo",</tab>
+        <tab>   b: 12,</tab>
+        <tab>   c: "bar"</tab>
+        <div>}</div>
+        <div>let {a: newName1, b: newName2} = o;</div>
+        <div>console.log(a); <comment>//result?</comment></div>
+        <div>console.log(newName1); <comment>//result?</comment></div>
+        <div>console.log(newName2); <comment>//result?</comment></div>
+    </block>
+    <answer id="a8">show answer</answer>
+    <br>
+    
+    <h4>property renaming & type enforcing</h4>
+    <block>
+        <div>let o = {</div>
+        <tab>   a: "foo",</tab>
+        <tab>   b: 12,</tab>
+        <tab>   c: "bar"</tab>
+        <div>}</div>
+        <div>let {a: newName1, b: newName2} : {a: string, b: number} = o;</div>
+        <div>console.log(newName1); <comment>//result?</comment></div>
+        <div>console.log(newName2); <comment>//result?</comment></div>
+    </block>
+    <answer id="a9">show answer</answer>
+    <br>
+    
+    <h4>default values</h4>
+    <block>
+        <div>function f(obj: {a: string, b?: number}) {</div>
+        <tab>   let {a, b = 1001} = obj;</tab>
+        <tab>   console.log(a); <comment>//result?</comment></tab>
+        <tab>   console.log(b); <comment>//result?</comment></tab>
+        <div>}</div>
+        <div>f({a:'abc'});</div>
+    </block>
+    <answer id="a10">show answer</answer>
+    <br>
+    
+    <h4>function destructing</h4>
+    <block>
+        <div>type C = {a: string, b?: number}</div>
+        <div>function f({a, b}: C): void {</div>
+        <tab>   console.log(a); <comment>//result?</comment></tab>
+        <tab>   console.log(b); <comment>//result?</comment></tab>
+        <div>}</div>
+        <div>f({a:'abc'});</div>
+    </block>
+    <answer id="a11">show answer</answer>
+    <br>
+    
+    <h4>function optional param</h4>
+    <block>
+        <div>function f({a, b} = {a: "z", b: 99}): void {</div>
+        <tab>   console.log(a); <comment>//result?</comment></tab>
+        <tab>   console.log(b); <comment>//result?</comment></tab>
+        <div>}</div>
+        <div>f();</div>
+    </block>
+    <answer id="a12">show answer</answer>
+    <br>
+    
+    <h4>function optional param property</h4>
+    <block>
+        <div>function f({a, b = 88} = {a: "z"}): void {</div>
+        <tab>   console.log(a);</tab>
+        <tab>   console.log(b);</tab>
+        <div>}</div>
+        <div>f({a: "yes"}) <comment>//result?</comment></div>
+        <div>f() <comment>//result?</comment></div>
+        <div>f({}) <comment>//result?</comment></div>
+    </block>
+    <answer id="a13">show answer</answer>
+    <br>
+    
+    <script src="./destructing.js"></script>
+
+</html>
