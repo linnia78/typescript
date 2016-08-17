@@ -22,11 +22,8 @@ var main;
             });
             return this;
         };
-        interfaces.prototype.a2 = function () {
-            return this;
-        };
         interfaces.prototype.start = function () {
-            this.a1().a2();
+            this.a1();
         };
         return interfaces;
     }());

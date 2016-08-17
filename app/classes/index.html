@@ -1,0 +1,63 @@
+<html>
+
+<head>
+  <meta charset="utf-8">
+
+  <title>The Typescript - Classes</title>
+  <link rel="stylesheet" href="/app/app.css">
+</head>
+
+<body>
+    <a href="/">Main</a>
+    <h1>Classes</h1>
+    
+    <h4>class</h4>
+    <block>
+        <div>class Greeter {</div>
+        <tab>    greeting: string;</tab>
+        <tab>    constructor(message: string) {</tab>
+        <tab2>        this.greeting = message;</tab2>
+        <tab>    }</tab>
+        <tab>    greet() {</tab>
+        <tab2>        return "Hello, " + this.greeting;</tab2>
+        <tab>    }</tab>
+        <div>}</div>
+        <div></div>
+        <div>let greeter = new Greeter("world");</div>
+        <div>greeter() <comment>result?</comment></div>
+    </block>
+    <answer id="a1">show answer</answer>
+    <br>
+    
+    <h4>inheritance</h4>
+    <block>
+        <div>class Animal {</div>
+        <tab>    name: string;</tab>
+        <tab>    constructor(theName: string) { this.name = theName; }</tab>
+        <tab>    move(distanceInMeters: number = 0) {</tab>
+        <tab2>        console.log(`${this.name} moved ${distanceInMeters}m.`);</tab2>
+        <tab>    }</tab>
+        <div>}</div><br>
+        <div>class Snake extends Animal {</div>
+        <tab>    constructor(name: string) { super(name); }</tab>
+        <tab>    move(distanceInMeters = 5) {</tab>
+        <tab2>        console.log("Slithering...");</tab2>
+        <tab2>        super.move(distanceInMeters);</tab2>
+        <tab>    }</tab>
+        <div>}</div><br>
+        <div>class Horse extends Animal {</div>
+        <tab>    constructor(name: string) { super(name); }</tab>
+        <tab>    move(distanceInMeters = 45) {</tab>
+        <tab2>        console.log("Galloping...");</tab2>
+        <tab2>        super.move(distanceInMeters);</tab2>
+        <tab>    }</tab>
+        <div>}</div>
+        <div></div>
+        <div>let sam = new Snake("Sammy the Python");</div>
+        <div>let tom: Animal = new Horse("Tommy the Palomino");</div><br>
+        <div>sam.move();</div>
+        <div>tom.move(34);</div>
+    </block>
+    
+    <script src="./scripts.js"></script>
+</htab>

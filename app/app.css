@@ -14,6 +14,10 @@ comment {
     padding-left: 1em;
 }
 
+comment::before {
+    content: '// '
+}
+
 error {
     color: red;
     display: block;

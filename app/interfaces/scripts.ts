@@ -32,13 +32,8 @@ module main {
             return this;
         }
         
-        a2() {
-            
-            return this;
-        }
-        
         start() {
-            this.a1().a2();
+            this.a1();
         }
     }
 

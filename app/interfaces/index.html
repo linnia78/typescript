@@ -48,18 +48,18 @@
         <tab>    }</tab>
         <tab>    return newSquare;</tab>
         <div>}</div><br>
-        <div><comment> // error: 'colour' not expected in type 'SquareConfig'</comment></div>
-        <div><comment> // error: type checks when same type as interface are passed in</comment></div>
+        <div><comment> error: 'colour' not expected in type 'SquareConfig'</comment></div>
+        <div><comment> error: type checks when same type as interface are passed in</comment></div>
         <error>let mySquare = createSquare({ colour: "red", width: 100 });</error><br>
-        <div><comment> // workaround</comment></div>
+        <div><comment> workaround</comment></div>
         <div>let mySquare = createSquare({ width: 100, opacity: 0.5 } as SquareConfig);</div><br>
-        <div><comment> // preferred workaround : change interface to account for infinite other properties</comment></div>
+        <div><comment> preferred workaround : change interface to account for infinite other properties</comment></div>
         <div>interface SquareConfig {</div>
         <tab>    color?: string;</tab>
         <tab>    width?: number;</tab>
         <tab>    [propName: string]: any;</tab>
         <div>}</div><br>
-        <div><comment> // hacky workaround : assign the object to another variable</comment></div>
+        <div><comment> hacky workaround : assign the object to another variable</comment></div>
         <div>let squareOptions = { colour: "red", width: 100 };</div>
         <div>let mySquare = createSquare(squareOptions);</div>
     </block>
@@ -71,7 +71,7 @@
         <tab>    (source: string, subString: string): boolean;</tab>
         <div>}</div><br>
         <div>let mySearch: SearchFunc;</div>
-        <div>mySearch = function(source: string, subString: string) { <comment>//return type is not required but best practice is to be explicit</comment></div>
+        <div>mySearch = function(source: string, subString: string) { <comment>return type is not required but best practice is to be explicit</comment></div>
         <tab>    let result = source.search(subString);</tab>
         <tab>    if (result == -1) {</tab>
         <tab2>        return false;</tab2>
@@ -80,7 +80,7 @@
         <tab2>        return true;</tab2>
         <tab>    }</tab>
         <div>}</div><br>
-        <div><comment> // this is also valid : name of parameters do not need to match</comment></div>
+        <div><comment>this is also valid : name of parameters do not need to match</comment></div>
         <div>let mySearch: SearchFunc;</div>
         <div>mySearch = function(src: string, sub: string): boolean {</div>
         <tab>    let result = src.search(sub);</tab>
@@ -98,7 +98,7 @@
     <block>
         <div>interface StringArray {</div>
         <div>
-            <comment>//This index signature states that when a StringArray is indexed with a number, it will return a string.</comment>
+            <comment>This index signature states that when a StringArray is indexed with a number, it will return a string.</comment>
         </div>
         <tab>    [index: number]: string;</tab>
         <div>}</div><br>
@@ -116,12 +116,173 @@
         <div>class Dog extends Animal {</div>
         <tab>    breed: string;</tab>
         <div>}</div><br>
-        <div><comment>// Error: indexing with a 'string' will sometimes get you a Dog!</comment></div>
+        <div><comment>Error: indexing with a 'string' will sometimes get you a Dog!</comment></div>
         <div>interface NotOkay {</div>
         <tab>    [x: number]: Animal;</tab>
         <tab>    [x: string]: Dog;</tab>
         <div>}</div>
     </block>
+    <br>
+    
+    <h4>pitfalls2</h4>
+    <block>
+        <div>interface NumberDictionary {</div>
+        <tab>    [index: string]: number;</tab>
+        <tab>    length: number;    <comment>ok, length is a number</comment></tab>
+        <tab>    name: string;      <comment>rror, the type of 'name' is not a subtype of the indexer</comment></tab>
+        <div>}</div>
+        <div><comment>a string index declares that obj.property is also available as obj["property"].</comment></div>
+        <div><comment>In the following example, name’s type does not match the string index’s type, and the type-checker gives an error:</comment></div>
+    </block>
+    <br>
+    
+    <h4>implement interface</h4>
+    <block>
+        <div>interface ClockInterface {</div>
+        <tab>    currentTime: Date;</tab>
+        <tab>    setTime(d: Date);</tab>
+        <div>}</div>
+        <div></div>
+        <div>class Clock implements ClockInterface {</div>
+        <tab>    currentTime: Date;</tab>
+        <tab>    setTime(d: Date) {</tab>
+        <tab2>        this.currentTime = d;</tab2>
+        <tab>    }</tab>
+        <tab>    constructor(h: number, m: number) { }</tab>
+        <div>}</div>
+    </block>
+    <br>
+    
+    <h4>constructor interface error</h4>
+    <block>
+        <div>interface ClockConstructor {</div>
+        <tab>    new (hour: number, minute: number);</tab>
+        <div>}</div><br>
+        <div><comment>When a class implements an interface, only the instance side of the class is checked.</comment></div> 
+        <div><comment>Since the constructor sits in the static side, it is not included in this check.</comment></div>
+        <div>class Clock implements ClockConstructor { <comment>Compile Error </comment></div>
+        <tab>    currentTime: Date;</tab>
+        <tab>    constructor(h: number, m: number) { }</tab>
+        <div>}</div>
+    </block>
+    <br>
+    
+    <h4>constructor interface</h4>
+    <block>
+        <div>interface ClockConstructor {</div>
+        <tab>    new (hour: number, minute: number): ClockInterface;</tab>
+        <div>}</div>
+        <div>interface ClockInterface {</div>
+        <tab>    tick();</tab>
+        <div>}</div>
+        <div></div>
+        <div>function createClock(ctor: ClockConstructor, hour: number, minute: number): ClockInterface {</div>
+        <tab2>    return new ctor(hour, minute);</tab2>
+        <div>}</div>
+        <div></div>
+        <div>class DigitalClock implements ClockInterface {</div>
+        <tab>    constructor(h: number, m: number) { }</tab>
+        <tab>    tick() {</tab>
+        <tab2>        console.log("beep beep");</tab2>
+        <tab>    }</tab>
+        <div>}</div>
+        <div>class AnalogClock implements ClockInterface {</div>
+        <tab>    constructor(h: number, m: number) { }</tab>
+        <tab>    tick() {</tab>
+        <tab2>        console.log("tick tock");</tab2>
+        <tab>    }</tab>
+        <div>}</div>
+        <div></div>
+        <div>let digital = createClock(DigitalClock, 12, 17);</div>
+        <div>let analog = createClock(AnalogClock, 7, 32);</div>
+    </block>
+    <br>
+    
+    <h4>extending interfaces</h4>
+    <block>
+        <div>interface Shape {</div>
+        <tab>    color: string;</tab>
+        <div>}</div>
+        <div></div>
+        <div>interface PenStroke {</div>
+        <tab>    penWidth: number;</tab>
+        <div>}</div>
+        <div></div>
+        <div>interface Square extends Shape, PenStroke {</div>
+        <tabdiv>    sideLength: number;</tab>
+        <div>}</div>
+        <div></div>
+        <div>let square = <Square>{};</div>
+        <div>square.color = "blue";</div>
+        <div>square.sideLength = 10;</div>
+        <div>square.penWidth = 5.0;</div>
+    </block>
+    <br>
+    
+    <h4>hybrid types</h4>
+    <block>
+        <div>interface Counter {</div>
+        <tab>    (start: number): string;</tab>
+        <tab>    interval: number;</tab>
+        <tab>    reset(): void;</tab>
+        <div>}</div>
+        <div></div>
+        <div>function getCounter(): Counter {</div>
+        <tab>    let counter = <Counter>function (start: number) { };</tab>
+        <tab>    counter.interval = 123;</tab>
+        <tab>    counter.reset = function () { };</tab>
+        <tab>    return counter;</tab>
+        <div>}</div>
+        <div></div>
+        <div>let c = getCounter();</div>
+        <div>c(10);</div>
+        <div>c.reset();</div>
+        <div>c.interval = 5.0;</div>
+    </block>
+    <br>
+    
+    <h4>interfaces extending classes</h4>
+    <block>
+        <div>
+            <comment>when you create an interface that extends a class with private or protected members, </comment>
+        </div>
+        <div>
+            <comment>that interface type can only be implemented by that class or a subclass of it</comment>
+        </div>
+        <div>class Control {</div>
+        <tab>    private state: any;</tab>
+        <div>}</div>
+        <div></div>
+        <div>interface SelectableControl extends Control {</div>
+        <tab>    select(): void;</tab>
+        <div>}</div>
+        <div></div>
+        <div>class Button extends Control {</div>
+        <tab>    select() { }</tab>
+        <div>}</div>
+        <div></div>
+        <div>class TextBox extends Control {</div>
+        <tab>    select() { }</tab>
+        <div>}</div>
+        <div></div>
+        <div>class Image extends Control {</div>
+        <div>}</div>
+        <div></div>
+        <div>class Location {</div>
+        <tab>    select() { }</tab>
+        <div>}</div>
+        <div>
+            <comment>SelectableControl contains all of the members of Control, including the private state property. </comment>
+        </div>
+        <div>
+            <comment>Since state is a private member it is only possible for descendants of Control to implement SelectableControl./comment>
+        </div>
+        <div>
+            <comment>This is because only descendants of Control will have a state private member that originates in the same declaration,</comment>
+        </div>
+        <div>
+            <comment>which is a requirement for private members to be compatible.</comment>
+        </div>
+    </block>
     <script src="./scripts.js"></script>
-
-</html>
+</htab>

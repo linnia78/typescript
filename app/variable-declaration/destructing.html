@@ -15,8 +15,8 @@
     <block>
         <div>let input = [1, 2];</div>
         <div>let [first, second] = input;</div>
-        <div>first<comment>//result?</comment></div>
-        <div>second<comment>//result?</comment></div>
+        <div>first<comment>result?</comment></div>
+        <div>second<comment>result?</comment></div>
     </block>
     <answer id="a1">show answer</answer>
     <br>
@@ -26,8 +26,8 @@
         <div>let input = [1, 2];</div>
         <div>let [first, second] = input;</div>
         <div>[first, second] = [second, first];</div>
-        <div>first<comment>//result?</comment></div>
-        <div>second<comment>//result?</comment></div>
+        <div>first<comment>result?</comment></div>
+        <div>second<comment>result?</comment></div>
     </block>
     <answer id="a2">show answer</answer>
     <br>
@@ -40,8 +40,8 @@
         <tab>   console.log(second);</tab>
         <div>}</div>
         <div>f(input);</div><br>
-        <div>first<comment>//result?</comment></div>
-        <div>second<comment>//result?</comment></div>
+        <div>first<comment>result?</comment></div>
+        <div>second<comment>result?</comment></div>
     </block>
     <answer id="a3">show answer</answer>
     <br>
@@ -49,8 +49,8 @@
     <h4>rest params</h4>
     <block>
         <div>let [first, ...rest] = [1, 2, 3, 4];</div><br>
-        <div>console.log(first);<comment>//result?</comment></div>
-        <div>console.log(rest); <comment>//result?</comment></div>
+        <div>console.log(first);<comment>result?</comment></div>
+        <div>console.log(rest); <comment>result?</comment></div>
     </block>
     <answer id="a4">show answer</answer>
     <br>
@@ -59,9 +59,9 @@
     <block>
         <div>let [first] = [1, 2, 3, 4];</div>
         <div>let [, second, , fourth] = [1, 2, 3, 4];</div><br>
-        <div>console.log(first); <comment>//result?</comment></div>
-        <div>console.log(second); <comment>//result?</comment></div>
-        <div>console.log(fourth); <comment>//result?</comment></div>
+        <div>console.log(first); <comment>result?</comment></div>
+        <div>console.log(second); <comment>result?</comment></div>
+        <div>console.log(fourth); <comment>result?</comment></div>
     </block>
     <answer id="a5">show answer</answer>
     <br>
@@ -74,8 +74,8 @@
         <tab>   c: "bar"</tab>
         <div>}</div>
         <div>let {a, b} = o;</div>
-        <div>console.log(a); <comment>//result?</comment></div>
-        <div>console.log(b); <comment>//result?</comment></div>
+        <div>console.log(a); <comment>result?</comment></div>
+        <div>console.log(b); <comment>result?</comment></div>
     </block>
     <answer id="a6">show answer</answer>
     <br>
@@ -83,8 +83,8 @@
     <h4>direct object assign</h4>
     <block>
         <div>let {a, b} = {a: "baz", b: 101};</div>
-        <div>console.log(a); <comment>//result?</comment></div>
-        <div>console.log(b); <comment>//result?</comment></div>
+        <div>console.log(a); <comment>result?</comment></div>
+        <div>console.log(b); <comment>result?</comment></div>
     </block>
     <answer id="a7">show answer</answer>
     <br>
@@ -97,9 +97,9 @@
         <tab>   c: "bar"</tab>
         <div>}</div>
         <div>let {a: newName1, b: newName2} = o;</div>
-        <div>console.log(a); <comment>//result?</comment></div>
-        <div>console.log(newName1); <comment>//result?</comment></div>
-        <div>console.log(newName2); <comment>//result?</comment></div>
+        <div>console.log(a); <comment>result?</comment></div>
+        <div>console.log(newName1); <comment>result?</comment></div>
+        <div>console.log(newName2); <comment>result?</comment></div>
     </block>
     <answer id="a8">show answer</answer>
     <br>
@@ -112,8 +112,8 @@
         <tab>   c: "bar"</tab>
         <div>}</div>
         <div>let {a: newName1, b: newName2} : {a: string, b: number} = o;</div>
-        <div>console.log(newName1); <comment>//result?</comment></div>
-        <div>console.log(newName2); <comment>//result?</comment></div>
+        <div>console.log(newName1); <comment>result?</comment></div>
+        <div>console.log(newName2); <comment>result?</comment></div>
     </block>
     <answer id="a9">show answer</answer>
     <br>
@@ -122,8 +122,8 @@
     <block>
         <div>function f(obj: {a: string, b?: number}) {</div>
         <tab>   let {a, b = 1001} = obj;</tab>
-        <tab>   console.log(a); <comment>//result?</comment></tab>
-        <tab>   console.log(b); <comment>//result?</comment></tab>
+        <tab>   console.log(a); <comment>result?</comment></tab>
+        <tab>   console.log(b); <comment>result?</comment></tab>
         <div>}</div>
         <div>f({a:'abc'});</div>
     </block>
@@ -134,8 +134,8 @@
     <block>
         <div>type C = {a: string, b?: number}</div>
         <div>function f({a, b}: C): void {</div>
-        <tab>   console.log(a); <comment>//result?</comment></tab>
-        <tab>   console.log(b); <comment>//result?</comment></tab>
+        <tab>   console.log(a); <comment>result?</comment></tab>
+        <tab>   console.log(b); <comment>result?</comment></tab>
         <div>}</div>
         <div>f({a:'abc'});</div>
     </block>
@@ -145,8 +145,8 @@
     <h4>function optional param</h4>
     <block>
         <div>function f({a, b} = {a: "z", b: 99}): void {</div>
-        <tab>   console.log(a); <comment>//result?</comment></tab>
-        <tab>   console.log(b); <comment>//result?</comment></tab>
+        <tab>   console.log(a); <comment>result?</comment></tab>
+        <tab>   console.log(b); <comment>result?</comment></tab>
         <div>}</div>
         <div>f();</div>
     </block>
@@ -159,9 +159,9 @@
         <tab>   console.log(a);</tab>
         <tab>   console.log(b);</tab>
         <div>}</div>
-        <div>f({a: "yes"}) <comment>//result?</comment></div>
-        <div>f() <comment>//result?</comment></div>
-        <div>f({}) <comment>//result?</comment></div>
+        <div>f({a: "yes"}) <comment>result?</comment></div>
+        <div>f() <comment>result?</comment></div>
+        <div>f({}) <comment>result?</comment></div>
     </block>
     <answer id="a13">show answer</answer>
     <br>
