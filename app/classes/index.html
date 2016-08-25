@@ -1,56 +1,58 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
+    <meta charset="utf-8">
 
-  <title>The Typescript - Classes</title>
-  <link rel="stylesheet" href="/app/app.css">
+    <title>The Typescript - Classes</title>
+    <link rel="stylesheet" href="/app/app.css">
 </head>
 
 <body>
     <a href="/">Main</a>
     <h1>Classes</h1>
-    
+
     <h4>class</h4>
     <block>
         <div>class Greeter {</div>
-        <tab>    greeting: string;</tab>
-        <tab>    constructor(message: string) {</tab>
-        <tab2>        this.greeting = message;</tab2>
-        <tab>    }</tab>
-        <tab>    greet() {</tab>
-        <tab2>        return "Hello, " + this.greeting;</tab2>
-        <tab>    }</tab>
+        <tab> greeting: string;</tab>
+        <tab> constructor(message: string) {</tab>
+        <tab2> this.greeting = message;</tab2>
+        <tab> }</tab>
+        <tab> greet() {</tab>
+        <tab2> return "Hello, " + this.greeting;</tab2>
+        <tab> }</tab>
         <div>}</div>
         <div></div>
         <div>let greeter = new Greeter("world");</div>
-        <div>greeter() <comment>result?</comment></div>
+        <div>greeter()
+            <comment>result?</comment>
+        </div>
     </block>
     <answer id="a1">show answer</answer>
     <br>
-    
+
     <h4>inheritance</h4>
     <block>
         <div>class Animal {</div>
-        <tab>    name: string;</tab>
-        <tab>    constructor(theName: string) { this.name = theName; }</tab>
-        <tab>    move(distanceInMeters: number = 0) {</tab>
-        <tab2>        console.log(`${this.name} moved ${distanceInMeters}m.`);</tab2>
-        <tab>    }</tab>
+        <tab> name: string;</tab>
+        <tab> constructor(theName: string) { this.name = theName; }</tab>
+        <tab> move(distanceInMeters: number = 0) {</tab>
+        <tab2> console.log(`${this.name} moved ${distanceInMeters}m.`);</tab2>
+        <tab> }</tab>
         <div>}</div><br>
         <div>class Snake extends Animal {</div>
-        <tab>    constructor(name: string) { super(name); }</tab>
-        <tab>    move(distanceInMeters = 5) {</tab>
-        <tab2>        console.log("Slithering...");</tab2>
-        <tab2>        super.move(distanceInMeters);</tab2>
-        <tab>    }</tab>
+        <tab> constructor(name: string) { super(name); }</tab>
+        <tab> move(distanceInMeters = 5) {</tab>
+        <tab2> console.log("Slithering...");</tab2>
+        <tab2> super.move(distanceInMeters);</tab2>
+        <tab> }</tab>
         <div>}</div><br>
         <div>class Horse extends Animal {</div>
-        <tab>    constructor(name: string) { super(name); }</tab>
-        <tab>    move(distanceInMeters = 45) {</tab>
-        <tab2>        console.log("Galloping...");</tab2>
-        <tab2>        super.move(distanceInMeters);</tab2>
-        <tab>    }</tab>
+        <tab> constructor(name: string) { super(name); }</tab>
+        <tab> move(distanceInMeters = 45) {</tab>
+        <tab2> console.log("Galloping...");</tab2>
+        <tab2> super.move(distanceInMeters);</tab2>
+        <tab> }</tab>
         <div>}</div>
         <div></div>
         <div>let sam = new Snake("Sammy the Python");</div>
@@ -58,6 +60,225 @@
         <div>sam.move();</div>
         <div>tom.move(34);</div>
     </block>
-    
+    <br>
+
+    <h4>public</h4>
+    <span>declarations are public by default, previous class Animal is equivalent of the following</span>
+    <block>
+        <div>class Animal {</div>
+        <tab>public name: string;</tab>
+        <tab>public constructor(theName: string) { this.name = theName; }</tab>
+        <tab2>public move(distanceInMeters: number) {</tab2>
+        <tab3>console.log(`${this.name} moved ${distanceInMeters}m.`);</tab3>
+        <tab2>}</tab2>
+        <div>}</div>
+    </block>
+    <br>
+
+    <h4>private</h4>
+    <block>
+        <div>class Animal {</div>
+        <tab>private name: string;</tab>
+        <tab>constructor(theName: string) { this.name = theName; }</tab>
+        <div>}</div>
+    </block>
+    <answer id="a2">new Animal("Cat").name; ?</answer>
+    <br>
+
+    <h4>class comparision</h4>
+    <block>
+        <div>class Animal {</div>
+        <tab>private name: string;</tab>
+        <tab>constructor(theName: string) { this.name = theName; }</tab>
+        <div>}</div>
+
+        <div>class Rhino extends Animal {</div>
+        <tab>constructor() { super("Rhino"); }</tab>
+        <div>}</div>
+
+        <div>class Employee {</div>
+        <tab>private name: string;</tab>
+        <tab>constructor(theName: string) { this.name = theName; }</tab>
+        <div>}</div>
+
+        <div>let animal = new Animal("Goat");</div>
+        <div>let rhino = new Rhino();</div>
+        <div>let employee = new Employee("Bob");</div>
+    </block>
+    <answer id="a3">animal = rhino ?</answer>
+    <answer id="a4">animal = employee ?</answer>
+    <br>
+
+    <h4>protected</h4>
+    <block>
+        <div>class Person {</div>
+        <tab>protected name: string;</tab>
+        <tab>constructor(name: string) { this.name = name; }</tab>
+        <div>}</div>
+
+        <div>class Employee extends Person {</div>
+        <tab>private department: string;</tab>
+
+        <tab>constructor(name: string, department: string) {</tab>
+        <tab2>super(name);</tab2>
+        <tab2>this.department = department;</tab2>
+        <tab>}</tab>
+
+        <tab>public getElevatorPitch() {</tab>
+        <tab2>return `Hello, my name is ${this.name} and I work in ${this.department}.`;</tab2>
+        <tab>}</tab>
+        <div>}</div>
+
+        <div>let howard = new Employee("Howard", "Sales");</div>
+    </block>
+    <answer id="a5">console.log(howard.getElevatorPitch()); ?</answer>
+    <answer id="a6">console.log(howard.name); ?</answer>
+    <br>
+
+    <h4>parameter properties</h4>
+    <span>short hand for instantiating class scoped variables through constructor</span>
+    <block>
+        <div>class Animal {</div>
+            <tab>constructor(private name: string) { }</tab>
+            <tab>move(distanceInMeters: number) {</tab>
+                <tab2>console.log(`${this.name} moved ${distanceInMeters}m.`);</tab2>
+            <tab>}</tab>
+        <div>}</div>
+    </block>
+    <br>
+
+    <h4>getters and setters</h4>
+    <block>
+        <div>let passcode = "secret passcode";</div>
+
+        <div>class Employee {</div>
+            <tab>private _fullName: string;</tab>
+
+            <tab>get fullName(): string {</tab>
+                <tab2>return this._fullName;</tab2>
+            <tab>}</tab>
+
+            <tab>set fullName(newName: string) {</tab>
+                <tab2>if (passcode && passcode == "secret passcode") {</tab2>
+                    <tab3>this._fullName = newName;</tab3>
+                <tab2>}</tab2>
+                <tab2>else {</tab2>
+                    <tab3>console.log("Error: Unauthorized update of employee!");</tab3>
+                <tab2>}</tab2>
+            <tab>}</tab>
+        <div>}</div>
+
+        <div>let employee = new Employee();</div>
+        <div>employee.fullName = "Bob Smith";</div>
+        <div>if (employee.fullName) {</div>
+            <tab>console.log(employee.fullName);</tab>
+        <div>}</div>
+    </block>
+    <answer id="a7">console.log(employee.fullName); ?</answer>
+    <br>
+
+    <h4>static properties</h4>
+    <block>
+        <div>class Grid {</div>
+            <tab>static origin = {x: 0, y: 0};</tab>
+            <tab>calculateDistanceFromOrigin(point: {x: number; y: number;}) {</tab>
+                <tab2>let xDist = (point.x - Grid.origin.x);</tab2>
+                <tab2>let yDist = (point.y - Grid.origin.y);</tab2>
+                <tab2>return Math.sqrt(xDist * xDist + yDist * yDist) / this.scale;</tab2>
+            <tab>}</tab>
+            <tab>constructor (public scale: number) { }</tab>
+        <div>}</div>
+
+        <div>let grid1 = new Grid(1.0);  <comment>1x scale</comment></div>
+        <div>let grid2 = new Grid(5.0);  <comment>5x scale</comment></div>
+    </block>
+    <answer id="a8">console.log(grid1.calculateDistanceFromOrigin({x: 10, y: 10})); ?</answer>
+    <answer id="a9">console.log(grid2.calculateDistanceFromOrigin({x: 10, y: 10})); ?</answer>
+    <br>
+
+    <h4>abstract class</h4>
+    <block>
+        <div>abstract class Animal {</div>
+            <tab>abstract makeSound(): void;</tab>
+            <tab>move(): void {</tab>
+                <tab2>console.log("roaming the earth...");</tab2>
+            <tab>}</tab>
+        <div>}</div>
+    </block>
+
+    <h4>abstract methods</h4>
+    <block>
+        <div>abstract class Animal {</div>
+            <tab>constructor(public name: string){</tab>
+
+            <tab>}</tab>
+            <tab>protected abstract talk(): void;</tab>
+        <div>}</div>
+
+        <div>class Dog extends Animal {</div>
+            <tab>constructor() {</tab>
+                <tab2>super("puppy");</tab2>
+            <tab>}</tab>
+
+            <tab>talk() {</tab>
+                <tab2>console.log(`${this.name} is talking`);</tab2>
+            <tab>}</tab>
+        <div>}</div>
+
+        <div>let dog = new Dog();</div>
+    </block>
+    <answer id="a10">dog.talk() ?</answer>
+    <br>
+
+    <h4>get reference of class</h4>
+    <block>
+        <div>class Greeter {</div>
+            <tab>static standardGreeting = "Hello, there";</tab>
+            <tab>greeting: string;</tab>
+            <tab>greet() {</tab>
+                <tab2>if (this.greeting) {</tab2>
+                    <tab3>return "Hello, " + this.greeting;</tab3>
+                <tab2>}</tab2>
+                <tab2>else {</tab2>
+                    <tab3>return Greeter.standardGreeting;</tab3>
+                <tab2>}</tab2>
+            <tab>}</tab>
+        <div>}</div>
+
+        <div>let greeter1: Greeter;</div>
+        <div>greeter1 = new Greeter();</div>
+        <div>console.log(greeter1.greet());</div>
+        <br>
+        <div>let greeterMaker: typeof Greeter = Greeter;</div>
+        <div>greeterMaker.standardGreeting = "Hey there!";</div>
+        <br>
+        <div>let greeter2: Greeter = new greeterMaker();</div>
+        <div>console.log(greeter2.greet());</div>
+        <br>
+    </block>
+    <span>Here we create a new variable called greeterMaker. <br>
+        This variable will hold the class itself, or said another way its constructor function. <br>
+        Here we use typeof Greeter, that is “give me the type of the Greeter class itself” rather than the instance type. <br>
+        Or, more precisely, “give me the type of the symbol called Greeter,” which is the type of the constructor function. <br>
+        This type will contain all of the static members of Greeter along with the constructor that creates instances of the Greeter class. <br>
+        We show this by using new on greeterMaker, creating new instances of Greeter and invoking them as before.</span>
+    <br>
+    <br>
+
+    <h4>Using a class as an interface</h4>
+    <span>a class declaration creates two things: a type representing instances of the class and a constructor function. <br> 
+    Because classes create types, you can use them in the same places you would be able to use interfaces.</span>
+    <block>
+        <div>class Point {</div>
+            <tab>x: number;</tab>
+            <tab>y: number;</tab>
+        <div>}</div>
+
+        <div>interface Point3d extends Point {</div>
+            <tab>z: number;</tab>
+        <div>}</div>
+
+        <div>let point3d: Point3d = {x: 1, y: 2, z: 3};</div>
+    </block>
     <script src="./scripts.js"></script>
-</htab>
+    </htab>
